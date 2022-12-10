@@ -222,8 +222,8 @@ ALTER TABLE TipoOrganizacion
 CREATE TABLE TipoPago
 (
 	"idTipoPago" integer not null,
-	"concepto" character varying(50) NOT NULL,
-    "costo" character varying(50) NOT NULL,
+	"concepto" character varying(100) NOT NULL,
+    "costo" character varying(100) NOT NULL,
 	"estatus" integer NOT NULL DEFAULT 1,
 	"idUsuarioCrea" integer DEFAULT NULL,
 	"fechaCrea" date NOT NULL,
@@ -297,7 +297,7 @@ CREATE TABLE TipoUrgencia
 (
 	"idTipoUrgencia" integer not null,
 	"clasificacion" integer not null,
-	"descripcion" character varying(20) NOT NULL,
+	"descripcion" character varying(100) NOT NULL,
 	"estatus" integer NOT NULL DEFAULT 1,
 	"idUsuarioCrea" integer DEFAULT NULL,
 	"fechaCrea" date NOT NULL,
