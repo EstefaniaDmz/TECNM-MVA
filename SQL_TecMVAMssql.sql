@@ -29,7 +29,7 @@ correo varchar(50) not null,
 clave varchar(50) not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 
@@ -47,7 +47,7 @@ nombre varchar (50) not null,
 creditoValor int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKActividad PRIMARY KEY (idActividad)
@@ -65,7 +65,7 @@ CREATE TABLE ActivoFijo
     idTipoActivoFijo int not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKActivoFijo PRIMARY KEY(idActivoFijo)
@@ -107,8 +107,8 @@ CREATE TABLE Alumno(
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKAlumno PRIMARY KEY(idAlumno)
 )
 
@@ -124,7 +124,7 @@ calificacion int  not null,
 idPeriodo int not null,
 estatus bit default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 CONSTRAINT iPKAlumnoCursoMateria PRIMARY KEY(idAlumnoCursoMateria)
@@ -157,7 +157,7 @@ CREATE TABLE Area
 	idEdificio int not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKArea PRIMARY KEY(idArea)
@@ -248,8 +248,8 @@ CREATE TABLE Aspirante(
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKAspirante PRIMARY KEY(idAspirante)
 )
 
@@ -279,8 +279,8 @@ CREATE TABLE Carrera(
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKCarrera PRIMARY KEY(idCarrera)
 )
 --Ciudad
@@ -308,7 +308,7 @@ salario int not null,
 idEmpleado int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKContrato PRIMARY KEY (idContrato)
@@ -321,7 +321,7 @@ descripcion varchar(50),
 cantidad int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKConsumible PRIMARY KEY (idConsumible)
@@ -337,8 +337,8 @@ CREATE TABLE CursoExtraordinario
 	fechaFinal datetime not null,
 	totalHoras int not null,
 	totalAlumnos int not null,
-	precio int not null,
-	precioIndividual decimal not null,
+	precio decimal(10,2) not null,
+	precioIndividual decimal(10,2) not null,
 	estatus bit default 1,
 	idUsuarioCrea int not null,
 	fechaCrea datetime default GETDATE(),
@@ -355,7 +355,7 @@ nombre varchar (50) not null,
 idEdificio int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKDepartamento PRIMARY KEY (idDepartamento)
@@ -428,7 +428,7 @@ idEstadoCivil int not null,
 idPuesto int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKEmpleado PRIMARY KEY (idEmpleado)
@@ -472,8 +472,8 @@ CREATE TABLE Ficha
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKFicha PRIMARY KEY(idFicha)
 )
 
@@ -522,7 +522,7 @@ motivo varchar (100) not null,
 fecha datetime not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKJustificante PRIMARY KEY (idJustificante)
@@ -554,7 +554,7 @@ CREATE TABLE Pago
 	idAlumno int not null,
 	idTipoPago int not null,
 	folio varchar(50) not null,
-	monto int not null,
+	monto decimal(10,2) not null,
 	estatus bit default 1,
 	idUsuarioCrea int not null,
 	fechaCrea datetime default GETDATE(),
@@ -598,8 +598,8 @@ CREATE TABLE Preparatoria(
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKPreparatoria PRIMARY KEY(idPreparatoria)
 )
 
@@ -644,8 +644,8 @@ fechaFinal datetime not null,
 estatus int default 1,
 idUsuarioCrea int not null,
 fechaCrea datetime not null default CURRENT_TIMESTAMP,
-idUsuarioModifica int not null,
-fechaModifica datetime not null
+idUsuarioModifica int default null,
+fechaModifica datetime default null
 constraint PKResidencia primary key (idResidencia)
 )
 
@@ -676,8 +676,8 @@ idOrganizacion int not null,
 estatus int default 1,
 idUsuarioCrea int not null,
 fechaCrea datetime not null default CURRENT_TIMESTAMP,
-idUsuarioModifica int not null,
-fechaModifica datetime not null
+idUsuarioModifica int default null,
+fechaModifica datetime default null
 constraint PKServicioSocial primary key (idServicioSocial)
 )
 
@@ -691,7 +691,7 @@ CREATE TABLE Software
 	descripcion varchar (50) not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKSoftware PRIMARY KEY(idSoftware)
@@ -704,7 +704,7 @@ CREATE TABLE SoftwareEquipo
 	idActivoFijo int not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKSoftwareEquipo PRIMARY KEY(idSoftwareEquipo)
@@ -721,7 +721,7 @@ numeroAlumnos int not null,
 notas varchar (100),
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKSolicitudLaboratorio primary key (idSolicitudLaboratorio)
@@ -748,7 +748,7 @@ idConsumible int,
 notas varchar (100),
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKSolicitudConsumible primary key (idSolicitudConsumible)
@@ -762,7 +762,7 @@ idSoftware int,
 notas varchar (100),
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKSolicitudSoftware primary key (idSolicitudSoftware)
@@ -778,7 +778,7 @@ idActivoFijo int,
 fecha datetime not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKSolicitudHerramienta primary key (idSolicitudHerramienta)
@@ -790,7 +790,7 @@ CREATE TABLE TipoActivoFijo
 	nombre varchar(50) not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKTipoActivoFijo PRIMARY KEY(idTipoActivoFijo)
@@ -867,8 +867,8 @@ CREATE TABLE TipoPreparatoria(
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKTipoPreparatoria PRIMARY KEY(idTipoPreparatoria)
 )
 
@@ -930,8 +930,8 @@ CREATE TABLE Turno(
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKTurno PRIMARY KEY(idTurno)
 )
 
@@ -951,8 +951,8 @@ CREATE TABLE Tutor(
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKTutor PRIMARY KEY(idTutor)
 )
 --VIsita
@@ -970,8 +970,8 @@ objetivo varchar (150),
 estatus int default 1,
 idUsuarioCrea int not null,
 fechaCrea datetime not null default CURRENT_TIMESTAMP,
-idUsuarioModifica int not null,
-fechaModifica datetime not null
+idUsuarioModifica int default null,
+fechaModifica datetime default null
 constraint PKVisita primary key (idVisita)
 )
 --zona
@@ -1035,8 +1035,8 @@ CREATE TABLE AsignaturaCarrera(
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
-	idUsuarioModifica int not null,
-	fechaModifica datetime not null
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
 	CONSTRAINT PKAsignaturaCarrera PRIMARY KEY(idAsignaturaCarrera)
 )
 --EmpleadoDocumento
@@ -1048,7 +1048,7 @@ idDocumento int not null,
 fechaEntrega date not null,
 estatus bit default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKEmpleadoDocumento PRIMARY KEY (idEmpleadoDocumento)
