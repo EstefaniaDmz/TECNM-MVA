@@ -24,6 +24,7 @@ idUsuario int identity (1,1),
 apellidoMaterno varchar(50) not null,
 apellidoPaterno varchar(50) not null,
 nombreCompleto varchar(50) not null,
+idTipoUsuario int not null,
 correo varchar(50) not null,
 clave varchar(50) not null,
 estatus int default 1,
@@ -243,6 +244,7 @@ CREATE TABLE Aspirante(
 	numeroInterior char (5),
 	numeroExterior char (5),
 	idAsentamiento int not null,
+	idPais int not null,
 	estatus bit default 1 not null,
 	idUsuarioCrea int not null,
 	fechaCrea datetime not null default CURRENT_TIMESTAMP,
@@ -423,6 +425,7 @@ numeroExterior varchar (10) null,
 numeroInterior varchar (10) null,
 fechaNacimiento datetime not null,
 idEstadoCivil int not null,
+idPuesto int not null,
 estatus int default 1,
 idUsuarioCrea int null,
 fechaCrea datetime null,
@@ -443,6 +446,18 @@ CREATE TABLE Estado
 	CONSTRAINT PKEstado PRIMARY KEY(idEstado)
 )
 
+--EstadoCivil
+CREATE TABLE EstadoCivil
+(
+	idEstadoCivil int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKEstadoCivil PRIMARY KEY(idEstadoCivil)
+)
+
 
 --Ficha
 
@@ -461,6 +476,43 @@ CREATE TABLE Ficha
 	fechaModifica datetime not null
 	CONSTRAINT PKFicha PRIMARY KEY(idFicha)
 )
+
+--Genero
+CREATE TABLE Genero
+(
+	idGenero int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKGenero PRIMARY KEY(idGenero)
+)
+
+--Hora
+CREATE TABLE Hora
+(
+	idHora int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKHora PRIMARY KEY(idHora)
+)
+
+--Hora
+CREATE TABLE InstitucionSalud
+(
+	idInstitucionSalud int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKInstitucionSalud PRIMARY KEY(idInstitucionSalud)
+)
+
 --Justificante
 CREATE TABLE Justificante
 (
@@ -511,6 +563,30 @@ CREATE TABLE Pago
 	CONSTRAINT PKPago PRIMARY KEY(idPago)
 )
 
+--Pais
+CREATE TABLE Pais
+(
+	idPais int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKPais PRIMARY KEY(idPais)
+)
+
+--Periodo
+CREATE TABLE Periodo
+(
+	idPeriodo int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKPeriodo PRIMARY KEY(idPeriodo)
+)
+
 --PReparatoria
 CREATE TABLE Preparatoria(
 	idPreparatoria int IDENTITY (1,1),
@@ -542,6 +618,18 @@ CREATE TABLE PrestamoPrefectura
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKPrestamoPrefectura PRIMARY KEY(idPrestamoPrefectura)
+)
+
+--Puesto
+CREATE TABLE Puesto
+(
+	idPuesto int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKPuestoo PRIMARY KEY(idPuesto)
 )
 
 --Residencia
@@ -639,6 +727,19 @@ fechaModifica datetime default null,
 constraint PKSolicitudLaboratorio primary key (idSolicitudLaboratorio)
 )
 
+--TipoActividad
+CREATE TABLE TipoActividad
+(
+	idTipoActividad int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoActividad PRIMARY KEY(idTipoActividad)
+)
+
+--SolicitudConsumible
 create table SolicitudConsumible
 (
 idSolicitudConsumible int identity(1,1),
@@ -708,6 +809,57 @@ CREATE TABLE TipoAsentamiento(
 	fechaModifica datetime default null
 	CONSTRAINT PKTipoAsentamiento PRIMARY KEY(idTipoAsentamiento)
 )
+
+--TipoCursoMateria
+CREATE TABLE TipoCursoMateria
+(
+	idTipoCursoMateria int IDENTITY (1,1),	
+	nombre varchar(50) not null,
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoCursoMateria PRIMARY KEY(idTipoCursoMateria)
+)
+
+--TipoDocumento
+CREATE TABLE TipoDocumento
+(
+	idTipoDocumento int IDENTITY (1,1),	
+	nombre varchar(50) not null,
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoDocumento PRIMARY KEY(idTipoDocumento)
+)
+
+--TipoOrganizacion
+CREATE TABLE TipoOrganizacion
+(
+	idTipoOrganizacion int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoOrganizacion PRIMARY KEY(idTipoOrganizacion)
+)
+
+--TipoPago
+CREATE TABLE TipoPago
+(
+	idTipoPago int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoPago PRIMARY KEY(idTipoPago)
+)
+
 --TipoPreparatoria
 CREATE TABLE TipoPreparatoria(
 	idTipoPreparatoria int IDENTITY (1,1),
@@ -718,6 +870,54 @@ CREATE TABLE TipoPreparatoria(
 	idUsuarioModifica int not null,
 	fechaModifica datetime not null
 	CONSTRAINT PKTipoPreparatoria PRIMARY KEY(idTipoPreparatoria)
+)
+
+--TipoSangre
+CREATE TABLE TipoSangre
+(
+	idTipoSangre int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoSangre PRIMARY KEY(idTipoSangre)
+)
+
+--TipoServicio
+CREATE TABLE TipoServicio
+(
+	idTipoServicio int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoServicio PRIMARY KEY(idTipoServicio)
+)
+
+--TipoUrgencia
+CREATE TABLE TipoUrgencia
+(
+	idTipoUrgencia int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoUrgencia PRIMARY KEY(idTipoUrgencia)
+)
+
+--TipoUsuario
+CREATE TABLE TipoUsuario
+(
+	idTipoUsuario int IDENTITY (1,1),	
+	estatus bit default 1 not null,
+	idUsuarioCrea int not null,
+	fechaCrea datetime not null,
+	idUsuarioModifica int default null,
+	fechaModifica datetime default null
+	CONSTRAINT PKTipoUsuario PRIMARY KEY(idTipoUsuario)
 )
 
 --TUrno
@@ -857,6 +1057,8 @@ constraint PKEmpleadoDocumento PRIMARY KEY (idEmpleadoDocumento)
 CREATE INDEX IX_Actividad on Actividad(idActividad)
 CREATE INDEX IX_ActivoFijo on ActivoFijo(idActivoFijo) 
 CREATE INDEX IX_Alumno on Alumno(idAlumno) 
+CREATE INDEX IX_AlumnoActividad on AlumnoActividad(idAlumnoActividad) 
+CREATE INDEX IX_AlumnoCursoMateria on AlumnoCursoMateria(idAlumnoCursoMateria)
 CREATE INDEX IX_Area on Area(idArea) 
 CREATE INDEX IX_Asentamiento on Asentamiento(idAsentamiento) 
 CREATE INDEX IX_Asignatura on Asignatura(idAsignatura) 
@@ -867,7 +1069,7 @@ CREATE INDEX IX_BiblioteaServicio on BibliotecaServicio(idBibliotecaServicio)
 CREATE INDEX IX_Carrera on Carrera(idCarrera) 
 CREATE INDEX IX_Ciudad on Ciudad(idCiudad) 
 CREATE INDEX IX_Contrato on Contrato(idContrato) 
-CREATE INDEX IX_Consumibles on Contrato(idContrato)
+CREATE INDEX IX_Consumible on Consumible(idConsumible)
 CREATE INDEX IX_CursoExtraordinario on CursoExtraordinario(idCursoExtraordinario) 
 CREATE INDEX IX_Departamento on Departamento(idDepartamento) 
 CREATE INDEX IX_Documento on Documento(idDocumento) 
@@ -875,11 +1077,19 @@ CREATE INDEX IX_Edificio on Edificio(idEdificio)
 CREATE INDEX IX_EnfermeriaServicio on EnfermeriaServicio(idEnfermeriaServicio) 
 CREATE INDEX IX_Empleado on Empleado(idEmpleado) 
 CREATE INDEX IX_Estado on Estado(idEstado) 
+CREATE INDEX IX_EstadoCivil on EstadoCivil(idEstadoCivil) 
 CREATE INDEX IX_Ficha on Ficha(idFicha) 
+CREATE INDEX IX_Genero on Genero(idGenero) 
+CREATE INDEX IX_Hora on Hora(idHora) 
+CREATE INDEX IX_InstitucionSalud on InstitucionSalud(idInstitucionSalud) 
 CREATE INDEX IX_Justificante on Justificante(idJustificante) 
 CREATE INDEX IX_Organizacion on Organizacion(idOrganizacion) 
+CREATE INDEX IX_Pago on Pago(idPago)
+CREATE INDEX IX_Pais on Pais(idPais)
+CREATE INDEX IX_Periodo on Periodo(idPeriodo)
 CREATE INDEX IX_Preparatoria on Preparatoria(idPreparatoria) 
 CREATE INDEX IX_PrestamoPrefectura on PrestamoPrefectura(idPrestamoPrefectura) 
+CREATE INDEX IX_Puesto on Puesto(idPuesto) 
 CREATE INDEX IX_Residencia on Residencia(idResidencia) 
 CREATE INDEX IX_Servicio on Servicio(idServicio) 
 CREATE INDEX IX_ServicioSocial on ServicioSocial(idServicioSocial) 
@@ -889,9 +1099,18 @@ CREATE INDEX IX_SolicitudLaboratorio on SolicitudLaboratorio(idSolicitudLaborato
 CREATE INDEX IX_SolicitudSoftware on SolicitudSoftware(idSolicitudSoftware)
 CREATE INDEX IX_SolicitudConsumible on SolicitudConsumible(idSolicitudConsumible)
 CREATE INDEX IX_SolicitudHerramienta on SolicitudHerramienta(idSolicitudHerramienta)
+CREATE INDEX IX_TipoActividad on TipoActividad(idTipoActividad)
 CREATE INDEX IX_TipoActivoFijo on TipoActivoFijo(idTipoActivoFijo) 
 CREATE INDEX IX_TipoAsentamiento on TipoAsentamiento(idTipoAsentamiento) 
+CREATE INDEX IX_TipoCursoMateria on TipoCursoMateria(idTipoCursoMateria) 
+CREATE INDEX IX_TipoDocumento on TipoDocumento(idTipoDocumento)
+CREATE INDEX IX_TipoOrganizacion on TipoOrganizacion(idTipoOrganizacion)
+CREATE INDEX IX_TipoPago on TipoPago(idTipoPago)
 CREATE INDEX IX_TipoPreparatoria on TipoPreparatoria(idTipoPreparatoria) 
+CREATE INDEX IX_TipoSangre on TipoSangre(idTipoSangre)
+CREATE INDEX IX_TipoServicio on TipoServicio(idTipoServicio)
+CREATE INDEX IX_TipoUrgencia on TipoUrgencia(idTipoUrgencia)
+CREATE INDEX IX_TipoUsuario on TipoUsuario(idTipoUsuario)
 CREATE INDEX IX_Turno on Turno(idTurno) 
 CREATE INDEX IX_Tutor on Tutor(idTutor) 
 CREATE INDEX IX_Usuario on Usuario(idUsuario) 
@@ -913,6 +1132,10 @@ ALTER TABLE Usuario
 ADD CONSTRAINT FKUsuarioUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
 
+ALTER TABLE Usuario
+ADD CONSTRAINT FKUsuarioUsuarioTipoUsuario FOREIGN KEY (idTipoUsuario)
+REFERENCES TipoUsuario(idTipoUsuario)
+
 ALTER TABLE Actividad
 ADD CONSTRAINT FKActividadUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
@@ -920,6 +1143,10 @@ REFERENCES Usuario(idUsuario)
 ALTER TABLE Actividad
 ADD CONSTRAINT FKActividadUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
+
+ALTER TABLE Actividad
+ADD CONSTRAINT FKActividadTipoActividad FOREIGN KEY (idTipoActividad)
+REFERENCES TipoActividad(idTipoActividad)
 
 ALTER TABLE ActivoFijo
 ADD CONSTRAINT FKActivoFijoTipoActivoFijo FOREIGN KEY (idTipoActivoFijo)
@@ -964,6 +1191,18 @@ REFERENCES Asentamiento(idAsentamiento)
 ALTER TABLE Alumno
 ADD CONSTRAINT FKAlumnoCiudadNacimiento FOREIGN KEY (idCiudadNacimiento)
 REFERENCES Ciudad(idCiudad)
+
+ALTER TABLE Alumno
+ADD CONSTRAINT FKAlumnoGenero FOREIGN KEY (idGenero)
+REFERENCES Genero(idGenero)
+
+ALTER TABLE Alumno
+ADD CONSTRAINT FKAlumnoInstitucionSalud FOREIGN KEY (idInstitucionSalud)
+REFERENCES InstitucionSalud(idInstitucionSalud)
+
+ALTER TABLE Alumno
+ADD CONSTRAINT FKAlumnoTipoSangre FOREIGN KEY (idTipoSangre)
+REFERENCES TipoSangre(idTipoSangre)
 
 
 ALTER TABLE Area
@@ -1018,6 +1257,10 @@ ALTER TABLE AsignaturaDocente
 ADD CONSTRAINT FKAsignaturaDocenteDocente FOREIGN KEY (idDocente)
 REFERENCES Empleado(idEmpleado)
 
+ALTER TABLE AsignaturaDocente
+ADD CONSTRAINT FKAsignaturaDocenteHora FOREIGN KEY (idHora)
+REFERENCES Hora(idHora)
+
 ALTER TABLE AlumnoAsignaturaDocente
 ADD CONSTRAINT FKAlumnoAsignaturaDocenteUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
@@ -1053,6 +1296,14 @@ REFERENCES Ciudad(idCiudad)
 ALTER TABLE Aspirante
 ADD CONSTRAINT FKAspiranteAsentamiento FOREIGN KEY (idAsentamiento)
 REFERENCES Asentamiento(idAsentamiento)
+
+ALTER TABLE Aspirante
+ADD CONSTRAINT FKAspiranteGenero FOREIGN KEY (idGenero)
+REFERENCES Genero(idGenero)
+
+ALTER TABLE Aspirante
+ADD CONSTRAINT FKAspirantePais FOREIGN KEY (idPais)
+REFERENCES Pais(idPais)
 
 ALTER TABLE BibliotecaServicio
 ADD CONSTRAINT FKBibliotecaServicioServicio FOREIGN KEY (idServicio)
@@ -1146,6 +1397,10 @@ ALTER TABLE Documento
 ADD CONSTRAINT FKDocumentoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
 
+ALTER TABLE Documento
+ADD CONSTRAINT FKDocumentoTipoDocumento FOREIGN KEY (idTipoDocumento)
+REFERENCES TipoDocumento(idTipoDocumento)
+
 ALTER TABLE Edificio
 ADD CONSTRAINT FKEdificioUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
@@ -1167,6 +1422,10 @@ ADD CONSTRAINT FKEnfermeriaServicioServicio FOREIGN KEY (idServicio)
 REFERENCES Servicio(idServicio)
 
 ALTER TABLE EnfermeriaServicio
+ADD CONSTRAINT FKEnfermeriaServicioTipoUrgencia FOREIGN KEY (idTipoUrgencia)
+REFERENCES TipoUrgencia(idTipoUrgencia)
+
+ALTER TABLE EnfermeriaServicio
 ADD CONSTRAINT FKEnfermeriaServicioUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
 
@@ -1179,9 +1438,21 @@ ALTER TABLE Empleado
 ADD CONSTRAINT FKEmpleadoAsentamiento FOREIGN KEY (idAsentamiento)
 REFERENCES Asentamiento(idAsentamiento)
 
---ALTER TABLE Empleado
---ADD CONSTRAINT FKEmpleadoIdPuesto FOREIGN KEY (idPuesto)
---REFERENCES Puesto(idPuesto)
+ALTER TABLE Empleado
+ADD CONSTRAINT FKEmpleadoIdPuesto FOREIGN KEY (idPuesto)
+REFERENCES Puesto(idPuesto)
+
+ALTER TABLE Empleado
+ADD CONSTRAINT FKEmpleadoIdGenero FOREIGN KEY (idGenero)
+REFERENCES Genero(idGenero)
+
+ALTER TABLE Empleado
+ADD CONSTRAINT FKEmpleadoPais FOREIGN KEY (idPais)
+REFERENCES Pais(idPais)
+
+ALTER TABLE Empleado
+ADD CONSTRAINT FKEmpleadoEstadoCivil FOREIGN KEY (idEstadoCivil)
+REFERENCES EstadoCivil(idEstadoCivil)
 
 ALTER TABLE Empleado
 ADD CONSTRAINT FKEmpleadoUsuarioCrea FOREIGN KEY (idUsuarioCrea)
@@ -1191,12 +1462,21 @@ ALTER TABLE Empleado
 ADD CONSTRAINT FKEmpleadoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
 
+
 ALTER TABLE Estado
 ADD CONSTRAINT FKEstadoUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
 
 ALTER TABLE Estado
 ADD CONSTRAINT FKEstadoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE EstadoCivil
+ADD CONSTRAINT FKEstadoCivilUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE EstadoCivil
+ADD CONSTRAINT FKEstadoCivilUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
 
 ALTER TABLE Ficha
@@ -1219,6 +1499,30 @@ ALTER TABLE Ficha
 ADD CONSTRAINT FKFichaUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
 
+ALTER TABLE Genero
+ADD CONSTRAINT FKGeneroUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE Genero
+ADD CONSTRAINT FKGeneroUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE Hora
+ADD CONSTRAINT FKHoraUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE Hora
+ADD CONSTRAINT FKHoraUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE InstitucionSalud
+ADD CONSTRAINT FKInstitucionSaludUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE InstitucionSalud
+ADD CONSTRAINT FKInstitucionSaludUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
 ALTER TABLE Justificante
 ADD CONSTRAINT FKJustificanteAlumno FOREIGN KEY (idAlumno)
 REFERENCES Alumno(idAlumno)
@@ -1236,6 +1540,10 @@ ADD CONSTRAINT FKOrganizacionAsentamiento FOREIGN KEY (idAsentamiento)
 REFERENCES Asentamiento(idAsentamiento)
 
 ALTER TABLE Organizacion
+ADD CONSTRAINT FKOrganizacionTipoOrganizacion FOREIGN KEY (idTipoOrganizacion)
+REFERENCES TipoOrganizacion(idTipoOrganizacion)
+
+ALTER TABLE Organizacion
 ADD CONSTRAINT FKOrganizacionUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
 
@@ -1248,6 +1556,10 @@ ADD CONSTRAINT FKPagoAlumno FOREIGN KEY (idAlumno)
 REFERENCES Alumno(idAlumno)
 
 ALTER TABLE Pago
+ADD CONSTRAINT FKPagoTipoPago FOREIGN KEY (idTipoPago)
+REFERENCES TipoPago(idTipoPago)
+
+ALTER TABLE	Pago
 ADD CONSTRAINT FKPagoUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
 
@@ -1255,6 +1567,21 @@ ALTER TABLE Pago
 ADD CONSTRAINT FKPagoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
 
+ALTER TABLE	Pais
+ADD CONSTRAINT FKPaisUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE Pais
+ADD CONSTRAINT FKPaisUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE	Periodo
+ADD CONSTRAINT FKPeriodoUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE Periodo
+ADD CONSTRAINT FKPeriodoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
 
 ALTER TABLE Preparatoria
 ADD CONSTRAINT FKPreparatoriaAsentamiento FOREIGN KEY (idAsentamiento)
@@ -1292,6 +1619,14 @@ ALTER TABLE PrestamoPrefectura
 ADD CONSTRAINT FKPrestamoPrefecturaUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
 
+ALTER TABLE Puesto
+ADD CONSTRAINT FKPuestoUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE Puesto
+ADD CONSTRAINT FKPuestoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
 ALTER TABLE Residencia
 ADD CONSTRAINT FKResidenciaAlumno FOREIGN KEY (idAlumno)
 REFERENCES Alumno(idAlumno)
@@ -1311,6 +1646,10 @@ REFERENCES Usuario(idUsuario)
 ALTER TABLE Residencia
 ADD CONSTRAINT FKResidenciaUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
+
+ALTER TABLE Servicio
+ADD CONSTRAINT FKServicioTipoServicio FOREIGN KEY (idTipoServicio)
+REFERENCES TipoServicio(idTipoServicio)
 
 ALTER TABLE Servicio
 ADD CONSTRAINT FKServicioUsuarioCrea FOREIGN KEY (idUsuarioCrea)
@@ -1429,13 +1768,93 @@ ALTER TABLE TipoActivoFijo
 ADD CONSTRAINT FKTipoActivoFijoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
 REFERENCES Usuario(idUsuario)
 
+ALTER TABLE TipoActividad
+ADD CONSTRAINT FKTipoActividadUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoActividad
+ADD CONSTRAINT FKTipoActividadUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoAsentamiento
+ADD CONSTRAINT FKTipoAsentamientoUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoAsentamiento
+ADD CONSTRAINT FKTipoAsentamientoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoCursoMateria
+ADD CONSTRAINT FKTipoCursoMateriaUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoCursoMateria
+ADD CONSTRAINT FKTipoCursoMateriaUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoDocumento
+ADD CONSTRAINT FKTipoDocumentoUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoDocumento
+ADD CONSTRAINT FKTipoDocumentoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoOrganizacion
+ADD CONSTRAINT FKTipoOrganizacionUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoOrganizacion
+ADD CONSTRAINT FKTipoOrganizacionUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+
+ALTER TABLE TipoPago
+ADD CONSTRAINT FKTipoPagoUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoPago
+ADD CONSTRAINT FKTipoPagoUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoPreparatoria
+ADD CONSTRAINT FKTipoPreparatoriaUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
 
 ALTER TABLE TipoPreparatoria
 ADD CONSTRAINT FKTipoPreparatoriaUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
 
-ALTER TABLE TipoPreparatoria
-ADD CONSTRAINT FKTipoPreparatoriaUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+ALTER TABLE TipoSangre
+ADD CONSTRAINT FKTipoSangreUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoSangre
+ADD CONSTRAINT FKTipoSangreUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoServicio
+ADD CONSTRAINT FKTipoServicioUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoServicio
+ADD CONSTRAINT FKTipoServicioUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoUrgencia
+ADD CONSTRAINT FKTipoUrgenciaUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoUrgencia
+ADD CONSTRAINT FKTipoUrgenciaUsuarioCrea FOREIGN KEY (idUsuarioCrea)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoUsuario
+ADD CONSTRAINT FKTipoUsuarioUsuarioModifica FOREIGN KEY (idUsuarioModifica)
+REFERENCES Usuario(idUsuario)
+
+ALTER TABLE TipoUsuario
+ADD CONSTRAINT FKTipoUsuarioUsuarioCrea FOREIGN KEY (idUsuarioCrea)
 REFERENCES Usuario(idUsuario)
 
 ALTER TABLE Turno
