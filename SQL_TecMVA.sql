@@ -1,18 +1,7 @@
 
 USE master
 GO
-
-IF DB_ID (N'TecMVA') IS NOT NULL
-DROP DATABASE TecMVA
-GO
-
 CREATE DATABASE TecMVA
-ON
-( NAME = TecMVA_dat,
-    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\TecMVA.mdf')
-LOG ON
-( NAME = TecMVA_log,
-    FILENAME = 'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\TecMVA.ldf') ;
 GO
 
 USE TecMVA
@@ -26,10 +15,10 @@ apellidoPaterno varchar(50) not null,
 nombreCompleto varchar(50) not null,
 idTipoUsuario int not null,
 correo varchar(50) not null,
-clave varchar(50) not null,
+clave varbinary(MAX) not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 
@@ -47,7 +36,7 @@ nombre varchar (50) not null,
 creditoValor int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKActividad PRIMARY KEY (idActividad)
@@ -65,7 +54,7 @@ CREATE TABLE ActivoFijo
     idTipoActivoFijo int not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKActivoFijo PRIMARY KEY(idActivoFijo)
@@ -123,7 +112,7 @@ calificacion int  not null,
 idPeriodo int not null,
 estatus bit default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 CONSTRAINT iPKAlumnoCursoMateria PRIMARY KEY(idAlumnoCursoMateria)
@@ -156,7 +145,7 @@ CREATE TABLE Area
 	idEdificio int not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKArea PRIMARY KEY(idArea)
@@ -307,7 +296,7 @@ salario int not null,
 idEmpleado int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKContrato PRIMARY KEY (idContrato)
@@ -320,7 +309,7 @@ descripcion varchar(50),
 cantidad int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKConsumible PRIMARY KEY (idConsumible)
@@ -354,7 +343,7 @@ nombre varchar (50) not null,
 idEdificio int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKDepartamento PRIMARY KEY (idDepartamento)
@@ -427,7 +416,7 @@ idEstadoCivil int not null,
 idPuesto int not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKEmpleado PRIMARY KEY (idEmpleado)
@@ -521,7 +510,7 @@ motivo varchar (100) not null,
 fecha datetime not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKJustificante PRIMARY KEY (idJustificante)
@@ -690,7 +679,7 @@ CREATE TABLE Software
 	descripcion varchar (50) not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKSoftware PRIMARY KEY(idSoftware)
@@ -703,7 +692,7 @@ CREATE TABLE SoftwareEquipo
 	idActivoFijo int not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKSoftwareEquipo PRIMARY KEY(idSoftwareEquipo)
@@ -720,7 +709,7 @@ numeroAlumnos int not null,
 notas varchar (100),
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKSolicitudLaboratorio primary key (idSolicitudLaboratorio)
@@ -747,7 +736,7 @@ idConsumible int,
 notas varchar (100),
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKSolicitudConsumible primary key (idSolicitudConsumible)
@@ -761,7 +750,7 @@ idSoftware int,
 notas varchar (100),
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKSolicitudSoftware primary key (idSolicitudSoftware)
@@ -777,7 +766,7 @@ idActivoFijo int,
 fecha datetime not null,
 estatus int default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKSolicitudHerramienta primary key (idSolicitudHerramienta)
@@ -789,7 +778,7 @@ CREATE TABLE TipoActivoFijo
 	nombre varchar(50) not null,
 	estatus bit default 1,
 	idUsuarioCrea int null,
-	fechaCrea datetime null,
+	fechaCrea datetime null default CURRENT_TIMESTAMP,
 	idUsuarioModifica int default null,
 	fechaModifica datetime default null,
 	CONSTRAINT PKTipoActivoFijo PRIMARY KEY(idTipoActivoFijo)
@@ -1046,7 +1035,7 @@ idDocumento int not null,
 fechaEntrega date not null,
 estatus bit default 1,
 idUsuarioCrea int null,
-fechaCrea datetime null,
+fechaCrea datetime null default CURRENT_TIMESTAMP,
 idUsuarioModifica int default null,
 fechaModifica datetime default null,
 constraint PKEmpleadoDocumento PRIMARY KEY (idEmpleadoDocumento)
@@ -2044,7 +2033,7 @@ INSERT INTO TipoUsuario(fechaCrea)
 VALUES (GETDATE())
 
 INSERT INTO Usuario(apellidoMaterno,apellidoPaterno,nombreCompleto,idTipoUsuario,correo,clave,fechaCrea)
-VALUES('Lerma','Hernandez','Jesus Alejandro',1,'wanderingbard@outlook.es','contraseña',GETDATE())
+VALUES('Lerma','Hernandez','Jesus Alejandro',1,'wanderingbard@outlook.es', HashBytes('MD5','contrasena'),GETDATE())
 
 INSERT INTO TipoAsentamiento(nombre,idUsuarioCrea,fechaCrea)
 VALUES ('Tipo Asentamiento 1',1,GETDATE()),
@@ -2357,7 +2346,7 @@ INSERT INTO Asignatura (nombre, clave, horasPractica, horasTeoricas, creditos, i
             ('Taller de Base de datos','002',12,12,5, 1, GETDATE()),
             ('Topicos de Base de datos','003',12,12,5, 1, GETDATE()),
             ('Administracion para informatica','004',12,12,5, 1, GETDATE()),
-            ('Sistemas electrónicos para informática','005',12,12,5, 1, GETDATE());
+            ('Sistemas electrï¿½nicos para informï¿½tica','005',12,12,5, 1, GETDATE());
 
 INSERT INTO AsignaturaCarrera(idAsignatura, idCarrera, idUsuarioCrea, fechaCrea, idUsuarioModifica, fechaModifica)
 	VALUES (1, 1, 1, GETDATE(), 1, GETDATE()),
@@ -2427,11 +2416,11 @@ VALUES ('Office','Microsoft Office', 'Office 365','Vigente', 1, GETDATE()),
 ('Visual Studio','Microsoft Visual Studio', 'Visual Studio','Vigente', 1, GETDATE());
 
 INSERT INTO Usuario(nombreCompleto,apellidoPaterno,apellidoMaterno,correo,clave,idTipoUsuario, idUsuarioCrea, fechaCrea) 
-VALUES ('Alexis','Villarreal','Tovar','avillarrealt@gmail.com','001',1, 1, GETDATE()),
- ('Pedro','Chavarria','Contreras','pchavarriac@gmail.com','002',1, 1, GETDATE()),
- ('Ruben','Riojas','Rodriguez','rriojasr@gmail.com','003',1, 1, GETDATE()),
- ('Sonia','Barboza','Elizondo','sbarbozae@gmail.com','004',1, 1, GETDATE()),
- ('Carmina','Gonzalez','Escobedo','cgonzaleze@gmail.com','005',1, 1, GETDATE());
+VALUES ('Alexis','Villarreal','Tovar','avillarrealt@gmail.com',HashBytes('MD5','contrasena2'),1, 1, GETDATE()),
+ ('Pedro','Chavarria','Contreras','pchavarriac@gmail.com',HashBytes('MD5','contrasena3'),1, 1, GETDATE()),
+ ('Ruben','Riojas','Rodriguez','rriojasr@gmail.com',HashBytes('MD5','contrasena4'),1, 1, GETDATE()),
+ ('Sonia','Barboza','Elizondo','sbarbozae@gmail.com',HashBytes('MD5','contrasena5'),1, 1, GETDATE()),
+ ('Carmina','Gonzalez','Escobedo','cgonzaleze@gmail.com',HashBytes('MD5','contrasena6'),1, 1, GETDATE());
 
 
 
@@ -2443,17 +2432,17 @@ VALUES (1,2, 3,1, 1, 2, 1, GETDATE()),
 
 
 INSERT INTO Contrato(fechaInicio,fechaFinal,cantidadHoras,duracion,salario,idEmpleado, idUsuarioCrea, fechaCrea)
-VALUES ('2022-01-15','2023-05-12',12,4,2000,1, 1, GETDATE()),
-('2022-01-15','2023-05-12',24,12,3000,2, 1, GETDATE()),
-('2022-01-15','2023-05-12',16,6,2500,3, 1, GETDATE()),
-('2022-01-15','2023-05-12',24,12,3500,4, 1, GETDATE());
+VALUES ('2022-01-12','2023-05-12',12,4,2000,1, 1, GETDATE()),
+('2022-01-12','2023-05-12',24,12,3000,2, 1, GETDATE()),
+('2022-01-12','2023-05-12',16,6,2500,3, 1, GETDATE()),
+('2022-01-12','2023-05-12',24,12,3500,4, 1, GETDATE());
 
 INSERT INTO PrestamoPrefectura(idActivoFijo,fechaSalida,fechaRegreso,idDocente,idPrefecto, idUsuarioCrea, fechaCrea)
- VALUES (1, '2021-01-15','2022-01-15',1,1, 1, GETDATE()),
- (1, '2022-01-15','2023-05-12',2,2, 1, GETDATE()),
- (2, '2021-05-12','2022-01-15',3,2, 1, GETDATE()),
- (2, '2021-05-12','2022-01-15',1,1, 1, GETDATE()),
- (3, '2022-01-15','2022-01-15',1,2, 1, GETDATE());
+ VALUES (1, '2021-01-12','2022-01-12',1,1, 1, GETDATE()),
+ (1, '2022-01-12','2023-05-12',2,2, 1, GETDATE()),
+ (2, '2021-05-12','2022-01-12',3,2, 1, GETDATE()),
+ (2, '2021-05-12','2022-01-12',1,1, 1, GETDATE()),
+ (3, '2022-01-12','2022-01-12',1,2, 1, GETDATE());
 
 INSERT INTO TipoOrganizacion(idUsuarioCrea,fechaCrea)
 VALUES (1,GETDATE()),
@@ -2469,36 +2458,36 @@ VALUES ('Alexis', '1233245362783', 'Praderas del Sur', '532', '715', 3,2, 1, GET
 ('Manuel', '6784356342134', 'Hipodromo', '86','1001', 3, 2, 1, GETDATE());
 
 INSERT INTO Residencia (idAlumno,idEmpleado,idOrganizacion,fechaInicio,fechaFinal, idUsuarioCrea, fechaCrea)
-VALUES (1,1,1,'2020-03-08','2021-01-15', 1, GETDATE()),
-	   (1,1,1,'2020-03-08','2021-01-15', 1, GETDATE()),
+VALUES (1,1,1,'2020-03-08','2021-01-12', 1, GETDATE()),
+	   (1,1,1,'2020-03-08','2021-01-12', 1, GETDATE()),
 	   (2,3,1,'2020-03-08','2021-05-12', 1, GETDATE());
 
 
 INSERT INTO ServicioSocial(idAlumno,idOrganizacion,fechaInicio,fechaFinal, idUsuarioCrea, fechaCrea)
 VALUES (2,1,'2020-03-08','2020-03-08', 1, GETDATE()),
 (1,2,'2020-03-08','2020-03-08', 1, GETDATE()),
-(3,4,'2020-03-08','2021-01-15', 1, GETDATE()),
+(3,4,'2020-03-08','2021-01-12', 1, GETDATE()),
 (4,2,'2020-03-08','2020-03-08', 1, GETDATE()),
-(5,5,'2021-05-12','2022-01-15', 1, GETDATE());
+(5,5,'2021-05-12','2022-01-12', 1, GETDATE());
 
 INSERT INTO SolicitudLaboratorio (idEmpleado,fecha,numeroAlumnos,notas, idUsuarioCrea, fechaCrea)
-VALUES (1,'2022-01-15',20,'Disponible', 1, GETDATE()),
-(2,'2022-01-15',15,'Disponible', 1, GETDATE()),
-(3,'2022-01-15',35,'Disponible', 1, GETDATE()),
-(4,'2022-01-15', 20, 'Disponible', 1, GETDATE()),
-(5,'2022-01-15', 15, 'Disponible', 1, GETDATE());
+VALUES (1,'2022-01-12',20,'Disponible', 1, GETDATE()),
+(2,'2022-01-12',15,'Disponible', 1, GETDATE()),
+(3,'2022-01-12',35,'Disponible', 1, GETDATE()),
+(4,'2022-01-12', 20, 'Disponible', 1, GETDATE()),
+(5,'2022-01-12', 15, 'Disponible', 1, GETDATE());
 
 INSERT INTO Visita(idEmpleado,idCarrera,numeroAlumnos,semestre,fechaSolicitada,empresaPropuesta,idActivoFijo,objetivo, idUsuarioCrea, fechaCrea, idUsuarioModifica, fechaModifica)
-VALUES (3,2,20,7,'2022-01-15','Corporativo Monclova','1','Curso de Auditoria', 1, GETDATE(), 1, GETDATE()),
-       (1,1,15,7,'2022-01-15','Maxion Inmagusa','1','Conocimiento de la industria', 1, GETDATE(), 1, GETDATE()),   
-	   (4,4,10,9,'2022-01-15','Google','1','Conocimiento de instalaciones', 1, GETDATE(), 1, GETDATE()),  
-	   (5,5,8,7,'2022-01-15','Rebasa Monclova','1','Seguridad industrial', 1, GETDATE(), 1, GETDATE());
+VALUES (3,2,20,7,'2022-01-12','Corporativo Monclova','1','Curso de Auditoria', 1, GETDATE(), 1, GETDATE()),
+       (1,1,15,7,'2022-01-12','Maxion Inmagusa','1','Conocimiento de la industria', 1, GETDATE(), 1, GETDATE()),   
+	   (4,4,10,9,'2022-01-12','Google','1','Conocimiento de instalaciones', 1, GETDATE(), 1, GETDATE()),  
+	   (5,5,8,7,'2022-01-12','Rebasa Monclova','1','Seguridad industrial', 1, GETDATE(), 1, GETDATE());
 	   
 INSERT INTO Justificante(idAlumno,motivo,fecha, idUsuarioCrea, fechaCrea)
 VALUES (1, 'Temperatura' ,'2020-03-08', 1, GETDATE()),
 (2, 'Infeccion de Oido', '2021-05-12', 1, GETDATE()),
-(4, 'Fiebre', '2022-01-15', 1, GETDATE()),
-(5, 'Dolor de Cabeza', '2022-01-15', 1, GETDATE()),
+(4, 'Fiebre', '2022-01-12', 1, GETDATE()),
+(5, 'Dolor de Cabeza', '2022-01-12', 1, GETDATE()),
 (3, 'Gripe', '2020-03-08', 1, GETDATE());
 
 INSERT INTO SoftwareEquipo (idSoftware,idActivoFijo, idUsuarioCrea, fechaCrea)
@@ -2584,92 +2573,92 @@ GO
 
 CREATE VIEW [EstadosCiviles] AS
 SELECT A.idEstadoCivil,A.nombre,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.EstadoCivil') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[EstadoCivil] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.EstadoCivil') A RIGHT JOIN [TecMVA].[dbo].[EstadoCivil] B
 ON A.idEstadoCivil = B.idEstadoCivil
 GO
 
 CREATE VIEW [Generos] AS
 SELECT A.idGenero,A.nombre,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.Genero') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[Genero] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.Genero') A RIGHT JOIN [TecMVA].[dbo].[Genero] B
 ON A.idGenero = B.idGenero
 GO
 
 CREATE VIEW [Horas] AS
 SELECT A.idHora,A.descripcion,A.horaInicia,A.horaFinaliza,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.Hora') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[Hora] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.Hora') A RIGHT JOIN [TecMVA].[dbo].[Hora] B
 ON A.idHora = B.idHora
 GO
 
 CREATE VIEW [InstitucionesDeSalud] AS
 SELECT A.idInstitucionSalud,A.nombre,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.InstitucionSalud') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[InstitucionSalud] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.InstitucionSalud') A RIGHT JOIN [TecMVA].[dbo].[InstitucionSalud] B
 ON A.idInstitucionSalud = B.idInstitucionSalud
 GO
 
 CREATE VIEW [Paises] AS
 SELECT A.idPais,A.nombre,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.Pais') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[Pais] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.Pais') A RIGHT JOIN [TecMVA].[dbo].[Pais] B
 ON A.idPais = B.idPais
 GO
 
 CREATE VIEW [Periodos] AS
-SELECT A.idPeriodo,A.fechaInicia,A.fechaFinaliza,A.año,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.Periodo') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[Periodo] B
+SELECT A.idPeriodo,A.fechaInicia,A.fechaFinaliza,A.aÃ±o,A.idUsuarioCrea,A.fechaCrea
+FROM Openquery (POSTGRES,'SELECT * FROM public.Periodo') A RIGHT JOIN [TecMVA].[dbo].[Periodo] B
 ON A.idPeriodo = B.idPeriodo
 GO
 
 CREATE VIEW [Puestos] AS
 SELECT A.idPuesto,A.nombre,A.salario,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.Puesto') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[Puesto] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.Puesto') A RIGHT JOIN [TecMVA].[dbo].[Puesto] B
 ON A.idPuesto = B.idPuesto
 GO
 
 CREATE VIEW [TiposDeActividad] AS
 SELECT A.idTipoActividad,A.nombre,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.TipoActividad') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[TipoActividad] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.TipoActividad') A RIGHT JOIN [TecMVA].[dbo].[TipoActividad] B
 ON A.idTipoActividad = B.idTipoActividad
 GO
 
 CREATE VIEW [TiposCursosMaterias] AS
 SELECT A.idTipoCursoMateria,A.nombre,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.TipoCursoMateria') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[TipoCursoMateria] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.TipoCursoMateria') A RIGHT JOIN [TecMVA].[dbo].[TipoCursoMateria] B
 ON A.idTipoCursoMateria = B.idTipoCursoMateria
 GO
 
 CREATE VIEW [TiposDeOrganizaciones] AS
 SELECT A.idTipoOrganizacion,A.nombre,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.TipoOrganizacion') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[TipoOrganizacion] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.TipoOrganizacion') A RIGHT JOIN [TecMVA].[dbo].[TipoOrganizacion] B
 ON A.idTipoOrganizacion = B.idTipoOrganizacion
 GO
 
 CREATE VIEW [TiposDePagos] AS
 SELECT A.idTipoPago,A.concepto,A.costo,A.idUsuarioCrea,A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.TipoPago') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[TipoPago] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.TipoPago') A RIGHT JOIN [TecMVA].[dbo].[TipoPago] B
 ON A.idTipoPago = B.idTipoPago
 GO
 
 CREATE VIEW [TiposDeSangre] AS
 SELECT A.idTipoSangre, A.tipo, A.idUsuarioCrea, A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.TipoSangre') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[TipoSangre] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.TipoSangre') A RIGHT JOIN [TecMVA].[dbo].[TipoSangre] B
 ON A.idTipoSangre = B.idTipoSangre
 GO
 
 CREATE VIEW [TiposDeServicios] AS
 SELECT A.idTipoServicio, A.nombre, A.idUsuarioCrea, A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.TipoServicio') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[TipoServicio] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.TipoServicio') A RIGHT JOIN [TecMVA].[dbo].[TipoServicio] B
 ON A.idTipoServicio = B.idTipoServicio
 GO
 
 CREATE VIEW [TiposDeUrgencia] AS
 SELECT A.idTipoUrgencia, A.clasificacion,A.descripcion, A.idUsuarioCrea, A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.TipoUrgencia') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[TipoUrgencia] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.TipoUrgencia') A RIGHT JOIN [TecMVA].[dbo].[TipoUrgencia] B
 ON A.idTipoUrgencia = B.idTipoUrgencia
 GO
 
 
 CREATE VIEW [TiposDeUsuarios] AS
 SELECT A.idTipoUsuario, A.tipo, A.idUsuarioCrea, A.fechaCrea
-FROM Openquery (POSTGRES,'SELECT * FROM TecMVA.public.TipoUsuario') A RIGHT JOIN [DESKTOP-K3VUUJG\SQLEXPRESS].[TecMVA].[dbo].[TipoUsuario] B
+FROM Openquery (POSTGRES,'SELECT * FROM public.TipoUsuario') A RIGHT JOIN [TecMVA].[dbo].[TipoUsuario] B
 ON A.idTipoUsuario = B.idTipoUsuario
 GO
 
@@ -2690,7 +2679,7 @@ Select * from [TiposDeUrgencia]
 Select * from [TiposDeUsuarios]
 GO
 
-CREATE VIEW [Vista_Usuarios_SA] AS
+ALTER VIEW [Vista_Usuarios_SA] AS
 SELECT idUsuario,
        apellidoMaterno,
 	   apellidoPaterno,
@@ -2698,9 +2687,9 @@ SELECT idUsuario,
 	   correo,
 	   clave,
 	   (
-	   Select * from openquery(POSTGRES,'SELECT "tipo" FROM TecMVA.public.TipoUsuario WHERE "idTipoUsuario" = 1')
+	   Select * from openquery(POSTGRES,'SELECT "tipo" FROM public.TipoUsuario WHERE "idTipoUsuario" = 1') 
 	   )
-	   fechaCrea
+	   TipoUsuario
 FROM Usuario 
 GO
 
